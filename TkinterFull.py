@@ -1,15 +1,18 @@
-#Default values in window
-#File explorer for file loc
+# Default values in window
+# Create a log of all values
 
+from tkinter import filedialog
 from tkinter import *
 
 master = Tk()
 
-fields = 'File Loc', 'Id', 'Name', 'FullName', 'Bubble Title', 'Category', 'Table Name', 'Table Type', \
-         'Data Source', 'Coverage', 'Always Show', 'Update Frequency', 'Records', 'LinkedData1', 'LinkedData2',  'URL',\
+# List to store field names
+fields = 'Id', 'Name', 'FullName', 'Bubble Title', 'Category', 'Table Name', 'Table Type', \
+         'Data Source', 'Coverage', 'Always Show', 'Update Frequency', 'Records', 'LinkedData1', 'LinkedData2', 'URL', \
          'ServerHandler', 'IsRegional', 'ParentLayer', 'Style', 'DataType', 'Vertex', 'Geography'
 
 
+# Verify input from user
 def try_input(i):
     if i == '':
         return "NULL"
@@ -18,6 +21,8 @@ def try_input(i):
     else:
         return i
 
+
+# Write all inputs to the .sql file
 def make_sql():
     Id = try_input(e2.get())
     Name = try_input(str(e3.get()))
@@ -41,7 +46,7 @@ def make_sql():
     DataType = try_input(str(e21.get()))
     Vertex = try_input(e22.get())
     Geography = try_input(str(e23.get()))
-    file = open(e1.get(), 'w')
+    file = open(master.filename, 'w')
     file.write("Update [Layer] Set [Sequence] = [Sequence] + 1 Where [Sequence] >= EMPTY;\n\n")
 
     file.write("Insert into [Layer]([Id], [Sequence], [Name], [FullName], [BubbleTitle], [Category], [TableName], "
@@ -52,9 +57,9 @@ def make_sql():
                "[Buffer], [Geography])\n\t")
 
     file.write(
-        "Values({0}, EMPTY, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, 1, {9}, 7, GETDATE(), {10}, {11}, 0, {12}, {13}, {14}, "
-        "{15}, \'Dynamic\', NULL, {16}, {17}, {18}, NULL, NULL, NULL, {19}, \'Kml\', \'uGRIDD\', {20}, \'Geography\', 30000"
-        ", geography::STGeomFromText({21}, 4326));\n".format(
+        "Values({0}, EMPTY, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, 1, {9}, 7, GETDATE(), {10}, {11}, 0, {12}, {13}, "
+        "{14}, {15}, \'Dynamic\', NULL, {16}, {17}, {18}, NULL, NULL, NULL, {19}, \'Kml\', \'uGRIDD\', {20}, "
+        "\'Geography\', 30000 , geography::STGeomFromText({21}, 4326));\n".format(
             Id, Name, FullName, BubbleTitle, Category, TableName, TableType, DataSource, Coverage, AlwaysShow,
             UpdateFrequency, Records, LinkedData1, LinkedData2, URL, ServerHandler, IsRegional, ParentLayer, Style,
             DataType, Vertex, Geography))
@@ -79,11 +84,11 @@ def make_sql():
     file.close()
 
 
+# Create labels
 for i in fields:
     Label(master, text=i).grid(row=fields.index(i))
 
-
-e1 = Entry(master)
+# Define values from entries
 e2 = Entry(master)
 e3 = Entry(master)
 e4 = Entry(master)
@@ -107,35 +112,38 @@ e21 = Entry(master)
 e22 = Entry(master)
 e23 = Entry(master)
 
+master.filename = filedialog.asksaveasfilename(initialdir="/", defaultextension=".sql",
+                                               filetypes=(("sql", "*.sql"), ("all files", "*.*")))
 
-e1.grid(row=0, column=1, sticky=W+E)
-e1.grid(row=0, column=1, sticky=W+E)
-e2.grid(row=1, column=1, sticky=W+E)
-e3.grid(row=2, column=1, sticky=W+E)
-e4.grid(row=3, column=1, sticky=W+E)
-e5.grid(row=4, column=1, sticky=W+E)
-e6.grid(row=5, column=1, sticky=W+E)
-e7.grid(row=6, column=1, sticky=W+E)
-e8.grid(row=7, column=1, sticky=W+E)
-e9.grid(row=8, column=1, sticky=W+E)
-e10.grid(row=9, column=1, sticky=W+E)
-e11.grid(row=10, column=1, sticky=W+E)
-e12.grid(row=11, column=1, sticky=W+E)
-e13.grid(row=12, column=1, sticky=W+E)
-e14.grid(row=13, column=1, sticky=W+E)
-e15.grid(row=14, column=1, sticky=W+E)
-e16.grid(row=15, column=1, sticky=W+E)
-e17.grid(row=16, column=1, sticky=W+E)
-e18.grid(row=17, column=1, sticky=W+E)
-e19.grid(row=18, column=1, sticky=W+E)
-e20.grid(row=19, column=1, sticky=W+E)
-e21.grid(row=20, column=1, sticky=W+E)
-e22.grid(row=21, column=1, sticky=W+E)
-e23.grid(row=22, column=1, sticky=W+E)
+# Create tkinter rows
+e2.grid(row=0, column=1, sticky=W + E)
+e3.grid(row=1, column=1, sticky=W + E)
+e4.grid(row=2, column=1, sticky=W + E)
+e5.grid(row=3, column=1, sticky=W + E)
+e6.grid(row=4, column=1, sticky=W + E)
+e7.grid(row=5, column=1, sticky=W + E)
+e8.grid(row=6, column=1, sticky=W + E)
+e9.grid(row=7, column=1, sticky=W + E)
+e10.grid(row=8, column=1, sticky=W + E)
+e11.grid(row=9, column=1, sticky=W + E)
+e12.grid(row=10, column=1, sticky=W + E)
+e13.grid(row=11, column=1, sticky=W + E)
+e14.grid(row=12, column=1, sticky=W + E)
+e15.grid(row=13, column=1, sticky=W + E)
+e16.grid(row=14, column=1, sticky=W + E)
+e17.grid(row=15, column=1, sticky=W + E)
+e18.grid(row=16, column=1, sticky=W + E)
+e19.grid(row=17, column=1, sticky=W + E)
+e20.grid(row=18, column=1, sticky=W + E)
+e21.grid(row=19, column=1, sticky=W + E)
+e22.grid(row=20, column=1, sticky=W + E)
+e23.grid(row=21, column=1, sticky=W + E)
 
+# Create Quit and Save buttons
 Button(master, text='Quit', command=master.quit).grid(row=23, column=0, sticky=W, pady=4)
 Button(master, text='Save', command=make_sql).grid(row=23, column=1, sticky=W, pady=4)
 
+# Ensure text boxes expand with window
 master.columnconfigure(1, weight=1)
 
 mainloop()
