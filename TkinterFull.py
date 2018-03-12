@@ -7,9 +7,9 @@ from tkinter import *
 master = Tk()
 
 # List to store field names
-fields = 'Id', 'Name', 'FullName', 'Bubble Title', 'Category', 'Table Name', 'Table Type', \
-         'Data Source', 'Coverage', 'Always Show', 'Update Frequency', 'Records', 'LinkedData1', 'LinkedData2', 'URL', \
-         'ServerHandler', 'IsRegional', 'ParentLayer', 'Style', 'DataType', 'Vertex', 'Geography'
+fields = ['Id', 'Name', 'FullName', 'Bubble Title', 'Category', 'Table Name', 'Table Type',
+          'Data Source', 'Coverage', 'Always Show', 'Update Frequency', 'Records', 'LinkedData1', 'LinkedData2', 'URL',
+          'ServerHandler', 'IsRegional', 'ParentLayer', 'Style', 'DataType', 'Vertex', 'Geography']
 
 
 # Verify input from user
@@ -24,6 +24,8 @@ def try_input(i):
 
 # Write all inputs to the .sql file
 def make_sql():
+    master.filename = filedialog.asksaveasfilename(initialdir="/", defaultextension=".sql",
+                                                   filetypes=(("sql", "*.sql"), ("all files", "*.*")))
     Id = try_input(e2.get())
     Name = try_input(str(e3.get()))
     FullName = try_input(str(e4.get()))
@@ -88,6 +90,7 @@ def make_sql():
 for i in fields:
     Label(master, text=i).grid(row=fields.index(i))
 
+
 # Define values from entries
 e2 = Entry(master)
 e3 = Entry(master)
@@ -111,9 +114,6 @@ e20 = Entry(master)
 e21 = Entry(master)
 e22 = Entry(master)
 e23 = Entry(master)
-
-master.filename = filedialog.asksaveasfilename(initialdir="/", defaultextension=".sql",
-                                               filetypes=(("sql", "*.sql"), ("all files", "*.*")))
 
 # Create tkinter rows
 e2.grid(row=0, column=1, sticky=W + E)
@@ -140,8 +140,8 @@ e22.grid(row=20, column=1, sticky=W + E)
 e23.grid(row=21, column=1, sticky=W + E)
 
 # Create Quit and Save buttons
-Button(master, text='Quit', command=master.quit).grid(row=23, column=0, sticky=W, pady=4)
-Button(master, text='Save', command=make_sql).grid(row=23, column=1, sticky=W, pady=4)
+Button(master, text='Quit', command=master.quit).grid(row=22, column=0, sticky=W, pady=4)
+Button(master, text='Save', command=make_sql).grid(row=22, column=1, sticky=W, pady=4)
 
 # Ensure text boxes expand with window
 master.columnconfigure(1, weight=1)
