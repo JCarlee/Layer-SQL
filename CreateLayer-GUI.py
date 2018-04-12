@@ -1,5 +1,3 @@
-# Default values in window
-
 from tkinter import filedialog
 from tkinter import *
 
@@ -85,6 +83,8 @@ def make_sql():
               );''')
 
     sql_file.close()
+
+    # Create CSV report file
     report_file = master.filename.replace('.sql', '.csv')
     csv_file = open(report_file, 'w')
     for a, b in zip(field_names, input_values):
@@ -96,57 +96,79 @@ def make_sql():
 for i in field_names:
     Label(master, text=i).grid(row=field_names.index(i))
 
-
 # Define values from entries
-e1 = Entry(master)
-e2 = Entry(master)
-e3 = Entry(master)
-e4 = Entry(master)
-e5 = Entry(master)
-e6 = Entry(master)
-e7 = Entry(master)
-e8 = Entry(master)
-e9 = Entry(master)
-e10 = Entry(master)
-e11 = Entry(master)
-e12 = Entry(master)
-e13 = Entry(master)
-e14 = Entry(master)
-e15 = Entry(master)
-e16 = Entry(master)
-e17 = Entry(master)
-e18 = Entry(master)
-e19 = Entry(master)
-e20 = Entry(master)
-e21 = Entry(master)
-e22 = Entry(master)
+e1 = Entry(master)  # Id
+e1.insert(END, '909')
+
+e2 = Entry(master)  # Name
+e2.insert(END, '**MileTX**')
+
+e3 = Entry(master)  # FullName
+e3.insert(END, '**Milepost (TX)**')
+
+e4 = Entry(master)  # Bubble Title
+e4.insert(END, '**Texas Milepost**')
+
+e5 = Entry(master)  # Catgegory
+e5.insert(END, '**Public Data**')
+
+e6 = Entry(master)  # Table Name
+e6.insert(END, '**Milepost_TX**')
+
+e7 = Entry(master)  # Table Type
+e7.insert(END, '**Sublayer/NULL**')
+
+e8 = Entry(master)  # Data Source
+e8.insert(END, '**TXDOT**')
+
+e9 = Entry(master)  # Coverage
+e9.insert(END, '**Texas**')
+
+e10 = Entry(master)  # Always Show
+e10.insert(END, '**MileTX**')
+
+e11 = Entry(master)  # Update Frequency
+e11.insert(END, '**12**')
+
+e12 = Entry(master)  # Records
+e12.insert(END, '**100**')
+
+e13 = Entry(master)  # LinkedData1
+e13.insert(END, '**PDF**')
+
+e14 = Entry(master)  # Linkeddata2
+e14.insert(END, 'NULL')
+
+e15 = Entry(master)  # URL
+e15.insert(END, 'NULL')
+
+e16 = Entry(master)  # ServerHandler
+e16.insert(END, '6')
+
+e17 = Entry(master)  # IsRegional
+e17.insert(END, '**1/0**')
+
+e18 = Entry(master)  # ParentLayer
+e18.insert(END, '**0**')
+
+e19 = Entry(master)  # Style
+e19.insert(END, '**Milepost.png**')
+
+e20 = Entry(master)  # DataType
+e20.insert(END, '**Point**')
+
+e21 = Entry(master)  # Vertex
+e21.insert(END, '0')
+
+e22 = Entry(master)  # Geography
 
 # Create tkinter rows
-e1.grid(row=0, column=1, sticky=W + E)
-e2.grid(row=1, column=1, sticky=W + E)
-e3.grid(row=2, column=1, sticky=W + E)
-e4.grid(row=3, column=1, sticky=W + E)
-e5.grid(row=4, column=1, sticky=W + E)
-e6.grid(row=5, column=1, sticky=W + E)
-e7.grid(row=6, column=1, sticky=W + E)
-e8.grid(row=7, column=1, sticky=W + E)
-e9.grid(row=8, column=1, sticky=W + E)
-e10.grid(row=9, column=1, sticky=W + E)
-e11.grid(row=10, column=1, sticky=W + E)
-e12.grid(row=11, column=1, sticky=W + E)
-e13.grid(row=12, column=1, sticky=W + E)
-e14.grid(row=13, column=1, sticky=W + E)
-e15.grid(row=14, column=1, sticky=W + E)
-e16.grid(row=15, column=1, sticky=W + E)
-e17.grid(row=16, column=1, sticky=W + E)
-e18.grid(row=17, column=1, sticky=W + E)
-e19.grid(row=18, column=1, sticky=W + E)
-e20.grid(row=19, column=1, sticky=W + E)
-e21.grid(row=20, column=1, sticky=W + E)
-e22.grid(row=21, column=1, sticky=W + E)
+e_list = [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20, e21, e22]
+
+for i in e_list:
+    i.grid(row=e_list.index(i), column=1, sticky=W + E)
 
 # Create Quit and Save buttons
-Button(master, text='Quit', command=master.quit).grid(row=22, column=0, sticky=W, pady=4)
 Button(master, text='Save', command=make_sql).grid(row=22, column=1, sticky=W, pady=4)
 
 # Ensure text boxes expand with window
