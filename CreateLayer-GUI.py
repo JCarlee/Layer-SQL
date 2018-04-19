@@ -19,11 +19,10 @@ def try_input(f):
         return f
 
 
-# Write all inputs to the .sql file and report csv
 def make_sql():
     master.filename = filedialog.asksaveasfilename(defaultextension=".sql",
                                                    filetypes=(("sql", "*.sql"), ("all files", "*.*")))
-    fid = try_input(e1.get())
+    fid = try_input(int(e1.get()))
     name = try_input(str(e2.get()))
     full_name = try_input(str(e3.get()))
     bubble_title = try_input(str(e4.get()))
@@ -32,18 +31,80 @@ def make_sql():
     table_type = try_input(str(e7.get()))
     data_source = try_input(str(e8.get()))
     coverage = try_input(str(e9.get()))
-    always_show = try_input(e10.get())
-    update_frequency = try_input(e11.get())
-    records = try_input(e12.get())
+    always_show = try_input(int(e10.get()))
+    update_frequency = try_input(int(e11.get()))
+    records = try_input(int(e12.get()))
     linked_data1 = try_input(str(e13.get()))
     linked_data2 = try_input(str(e14.get()))
     url = try_input(str(e15.get()))
-    server_handler = try_input(e16.get())
-    is_regional = try_input(e17.get())
-    parent_layer = try_input(e18.get())
+    server_handler = try_input(int(e16.get()))
+    is_regional = try_input(int(e17.get()))
+    parent_layer = try_input(int(e18.get()))
     style = try_input(str(e19.get()))
     data_type = try_input(str(e20.get()))
-    vertex = try_input(e21.get())
+    vertex = try_input(int(e21.get()))
+    geography = try_input(str(e22.get()))
+    sql_file = open(master.filename, 'w')
+    sql_file.write("Update [Layer] Set [Sequence] = [Sequence] + 1 Where [Sequence] >= EMPTY;\n\n")
+
+    sql_file.write("Insert into [Layer]([Id], [Sequence], [Name], [FullName], [BubbleTitle], [Category], [TableName], "
+                   "[TableType], [DataSource], [Coverage], [IsActive], [AlwaysShow], [Searchable], [InceptionDate], "
+                   "[UpdateFrequency], [Records], [SupportData], [LinkedData1], [LinkedData2], [URL], [ServerHandler], "
+                   "[ClientHandler], [ClientParameter], [IsRegional], [ParentLayer], [Style], [HighlightStyle], "
+                   "[Range], [Zoom], [DataType], [LayerType], [BubbleType], [Vertex], [Query], "
+                   "[Buffer], [Geography])\n\t")
+
+    sql_file.write(
+        "Values({0}, EMPTY, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, 1, {9}, 7, GETDATE(), {10}, {11}, 0, {12}, {13}, "
+        "{14}, {15}, \'Dynamic\', NULL, {16}, {17}, {18}, NULL, NULL, NULL, {19}, \'Kml\', \'uGRIDD\', {20}, "
+        "\'Geography\', 30000 , geography::STGeomFromText({21}, 4326));\n".format(
+            fid, name, full_name, bubble_title, category, table_name, table_type, data_source, coverage, always_show,
+            update_frequency, records, linked_data1, linked_data2, url, server_handler, is_regional, parent_layer,
+            style, data_type, vertex, geography))
+
+    sql_file.write('''
+    Select * from Layer order by Sequence;
+
+    GO
+
+    ALTER TABLE ''' + e6.get() + '\n\tADD CONSTRAINT [PK_' + e6.get() + '''] PRIMARY KEY CLUSTERED ([Id] ASC);
+
+    GO
+
+    CREATE SPATIAL INDEX [Idx_''' + e6.get() + '''_Geo]
+        ON ''' + e6.get() + ''' ([Geography])
+        USING GEOGRAPHY_GRID
+        WITH  (
+                GRIDS = (LEVEL_1 = MEDIUM, LEVEL_2 = MEDIUM, LEVEL_3 = MEDIUM, LEVEL_4 = MEDIUM)
+              );''')
+
+    sql_file.close()
+
+
+def make_sql_report():
+    master.filename = filedialog.asksaveasfilename(defaultextension=".sql",
+                                                   filetypes=(("sql", "*.sql"), ("all files", "*.*")))
+    fid = try_input(int(e1.get()))
+    name = try_input(str(e2.get()))
+    full_name = try_input(str(e3.get()))
+    bubble_title = try_input(str(e4.get()))
+    category = try_input(str(e5.get()))
+    table_name = try_input(e6.get())
+    table_type = try_input(str(e7.get()))
+    data_source = try_input(str(e8.get()))
+    coverage = try_input(str(e9.get()))
+    always_show = try_input(int(e10.get()))
+    update_frequency = try_input(int(e11.get()))
+    records = try_input(int(e12.get()))
+    linked_data1 = try_input(str(e13.get()))
+    linked_data2 = try_input(str(e14.get()))
+    url = try_input(str(e15.get()))
+    server_handler = try_input(int(e16.get()))
+    is_regional = try_input(int(e17.get()))
+    parent_layer = try_input(int(e18.get()))
+    style = try_input(str(e19.get()))
+    data_type = try_input(str(e20.get()))
+    vertex = try_input(int(e21.get()))
     geography = try_input(str(e22.get()))
     input_values = [fid, name, full_name, bubble_title, category, table_name, table_type, data_source, coverage,
                     always_show, update_frequency, records, linked_data1, linked_data2, url, server_handler,
@@ -98,7 +159,7 @@ for i in field_names:
 
 # Define values from entries
 e1 = Entry(master)  # Id
-e1.insert(END, '909')
+e1.insert(END, 909)
 
 e2 = Entry(master)  # Name
 e2.insert(END, '**MileTX**')
@@ -125,16 +186,9 @@ e9 = Entry(master)  # Coverage
 e9.insert(END, '**Texas**')
 
 e10 = Entry(master)  # Always Show
-e10.insert(END, '**MileTX**')
-
 e11 = Entry(master)  # Update Frequency
-e11.insert(END, '**12**')
-
 e12 = Entry(master)  # Records
-e12.insert(END, '**100**')
-
 e13 = Entry(master)  # LinkedData1
-e13.insert(END, '**PDF**')
 
 e14 = Entry(master)  # Linkeddata2
 e14.insert(END, 'NULL')
@@ -143,13 +197,13 @@ e15 = Entry(master)  # URL
 e15.insert(END, 'NULL')
 
 e16 = Entry(master)  # ServerHandler
-e16.insert(END, '6')
+e16.insert(END, 6)
 
 e17 = Entry(master)  # IsRegional
-e17.insert(END, '**1/0**')
+e17.insert(END, 1)
 
 e18 = Entry(master)  # ParentLayer
-e18.insert(END, '**0**')
+e18.insert(END, 0)
 
 e19 = Entry(master)  # Style
 e19.insert(END, '**Milepost.png**')
@@ -158,7 +212,6 @@ e20 = Entry(master)  # DataType
 e20.insert(END, '**Point**')
 
 e21 = Entry(master)  # Vertex
-e21.insert(END, '0')
 
 e22 = Entry(master)  # Geography
 
@@ -169,7 +222,8 @@ for i in e_list:
     i.grid(row=e_list.index(i), column=1, sticky=W + E)
 
 # Create Quit and Save buttons
-Button(master, text='Save', command=make_sql).grid(row=22, column=1, sticky=W, pady=4)
+Button(master, text='Save with Report', command=make_sql_report).grid(row=22, column=1, sticky=W+E, pady=4, padx=10)
+Button(master, text='Save', command=make_sql).grid(row=22, column=0, sticky=W+E, pady=4, padx=10)
 
 # Ensure text boxes expand with window
 master.columnconfigure(1, weight=1)
