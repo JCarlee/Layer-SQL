@@ -149,7 +149,7 @@ def make_sql_report():
     report_file = master.filename.replace('.sql', '.csv')
     csv_file = open(report_file, 'w')
     for a, b in zip(field_names, input_values):
-        csv_file.write(a + ',' + b + '\n')
+        csv_file.write(str(a) + ',' + str(b) + '\n')
     csv_file.close()
 
 
