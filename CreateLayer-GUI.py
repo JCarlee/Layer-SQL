@@ -114,8 +114,8 @@ def make_sql_report():
 
     sql_file.write("Insert into [Layer]([Id], [Sequence], [Name], [FullName], [BubbleTitle], [Category], [TableName], "
                    "[TableType], [DataSource], [Coverage], [IsActive], [AlwaysShow], [Searchable], [InceptionDate], "
-                   "[UpdateFrequency], [Records], [SupportData], [LinkedData1], [LinkedData2], [URL], [ServerHandler], "
-                   "[ClientHandler], [ClientParameter], [IsRegional], [ParentLayer], [Style], [HighlightStyle], "
+                   "[UpdateFrenquency], [Records], [SupportData], [LinkedData1], [LinkedData2], [URL], [ServerHandler]"
+                   ", [ClientHandler], [ClientParameter], [IsRegional], [ParentLayer], [Style], [HighlightStyle], "
                    "[Range], [Zoom], [DataType], [LayerType], [BubbleType], [Vertex], [Query], "
                    "[Buffer], [Geography])\n\t")
 
