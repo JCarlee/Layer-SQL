@@ -6,7 +6,8 @@ master = Tk()
 # List to store field names
 field_names = ['Id', 'Name', 'FullName', 'Bubble Title', 'Category', 'Table Name', 'Table Type',
                'Data Source', 'Coverage', 'Always Show', 'Update Frequency', 'Records', 'LinkedData1', 'LinkedData2',
-               'URL', 'ServerHandler', 'IsRegional', 'ParentLayer', 'Style', 'DataType', 'Vertex', 'Geography']
+               'URL', 'ServerHandler', 'Client Handler', 'Client Parameter', 'IsRegional', 'ParentLayer', 'Style',
+               'DataType', 'Vertex', 'Geography']
 
 
 # Verify input from user
