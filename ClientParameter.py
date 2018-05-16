@@ -12,6 +12,7 @@ def ask_user():
         pass
 
 
+# Get Geometry type from user and check for valid input
 def get_geom_type():
     while True:
         geom_type = input('Geometry type: ')
@@ -24,6 +25,7 @@ def get_geom_type():
     return geom_type
 
 
+# Acquire style from user
 def style_f(geom_style):
     style = ''
     while style == '':
@@ -42,6 +44,7 @@ def style_f(geom_style):
             get_geom_type()
 
 
+# User defines field names and relationships
 def fields_f():
     i = ''
     ugridd_field = []
