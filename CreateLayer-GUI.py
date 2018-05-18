@@ -87,7 +87,7 @@ def make_sql():
 def make_sql_report():
     master.filename = filedialog.asksaveasfilename(defaultextension=".sql",
                                                    filetypes=(("sql", "*.sql"), ("all files", "*.*")))
-    fid = try_input(e1.get())
+    fid = try_input(int(e1.get()))
     name = try_input(str(e2.get()))
     full_name = try_input(str(e3.get()))
     bubble_title = try_input(str(e4.get()))
@@ -96,20 +96,20 @@ def make_sql_report():
     table_type = try_input(str(e7.get()))
     data_source = try_input(str(e8.get()))
     coverage = try_input(str(e9.get()))
-    always_show = try_input(e10.get())
-    update_frequency = try_input(e11.get())
-    records = try_input(e12.get())
+    always_show = try_input(int(e10.get()))
+    update_frequency = try_input(int(e11.get()))
+    records = try_input(int(e12.get()))
     linked_data1 = try_input(str(e13.get()))
     linked_data2 = try_input(str(e14.get()))
     url = try_input(str(e15.get()))
     server_handler = try_input(e16.get())
     client_handler = try_input(str(e17.get()))
     client_parameter = try_input(str(e18.get()))
-    is_regional = try_input(e19.get())
-    parent_layer = try_input(e20.get())
+    is_regional = try_input(int(e19.get()))
+    parent_layer = try_input(int(e20.get()))
     style = try_input(str(e21.get()))
     data_type = try_input(str(e22.get()))
-    vertex = try_input(e23.get())
+    vertex = try_input(int(e23.get()))
     geography = try_input(str(e24.get()))
     input_values = [fid, name, full_name, bubble_title, category, table_name, table_type, data_source, coverage,
                     always_show, update_frequency, records, linked_data1, linked_data2, url, server_handler,
@@ -191,7 +191,7 @@ e9 = Entry(master)  # Coverage
 e9.insert(END, '**Texas**')
 
 e10 = Entry(master)  # Always Show
-e10.insert(END, '**MileTX**')
+e10.insert(END, '**1**')
 
 e11 = Entry(master)  # Update Frequency
 e11.insert(END, '**12**')
@@ -208,13 +208,13 @@ e14.insert(END, 'NULL')
 e15 = Entry(master)  # URL
 e15.insert(END, 'NULL')
 
-e16 = Entry(master)  # ClientHandler
-e16.insert(END, '**Dynamic/ArcGISREST**')
+e16 = Entry(master)  # ServerHandler
+e16.insert(END, '**6/NULL**')
 
-e17 = Entry(master)  # ClientParameter
+e17 = Entry(master)  # ClientHandler
+e17.insert(END, '**Dynamic/ArcGISRest**')
 
-e18 = Entry(master)  # ServerHandler
-e18.insert(END, '6')
+e18 = Entry(master)  # ClientParameter
 
 e19 = Entry(master)  # IsRegional
 e19.insert(END, '**1/0**')
@@ -239,9 +239,9 @@ e_list = [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16,
 for i in e_list:
     i.grid(row=e_list.index(i), column=1, sticky=W + E)
 
-# Create Quit and Save buttons
+# Create Save button
 Button(master, text='Save with Report', command=make_sql_report).grid(row=24, column=1, sticky=W+E, pady=4, padx=10)
-Button(master, text='Save', command=make_sql).grid(row=24, column=0, sticky=W+E, pady=4, padx=10)
+# Button(master, text='Save', command=make_sql).grid(row=24, column=0, sticky=W+E, pady=4, padx=10)
 
 # Ensure text boxes expand with window
 master.columnconfigure(1, weight=1)
