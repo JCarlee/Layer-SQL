@@ -7,7 +7,7 @@ master = Tk()
 field_names = ['Id', 'Name', 'FullName', 'Bubble Title', 'Category', 'Table Name', 'Table Type',
                'Data Source', 'Coverage', 'Always Show', 'Update Frequency', 'Records', 'LinkedData1', 'LinkedData2',
                'URL', 'ServerHandler', 'Client Handler', 'Client Parameter', 'IsRegional', 'ParentLayer', 'Style',
-               'DataType', 'Vertex', 'Geography']
+               'DataType', 'LayerType', 'Vertex', 'Geography']
 
 
 # Verify input from user
@@ -45,12 +45,14 @@ def make_sql_report():
     parent_layer = try_input(int(e20.get()))
     style = try_input(str(e21.get()))
     data_type = try_input(str(e22.get()))
-    vertex = try_input(int(e23.get()))
-    geography = try_input(str(e24.get()))
-    csv_true = e25.get()
+    layer_type = try_input(str(e23.get()))
+    vertex = try_input(int(e24.get()))
+    geography = try_input(str(e25.get()))
+    csv_true = e26.get()
     input_values = [fid, name, full_name, bubble_title, category, table_name, table_type, data_source, coverage,
                     always_show, update_frequency, records, linked_data1, linked_data2, url, server_handler,
-                    client_handler, client_parameter, is_regional, parent_layer, style, data_type, vertex, geography]
+                    client_handler, client_parameter, is_regional, parent_layer, style, data_type, layer_type, vertex,
+                    geography]
     sql_file = open(master.filename, 'w')
     sql_file.write("Update [Layer] Set [Sequence] = [Sequence] + 1 Where [Sequence] >= EMPTY;\n\n")
 
@@ -63,11 +65,11 @@ def make_sql_report():
 
     sql_file.write(
         "Values({0}, EMPTY, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, 1, {9}, 7, GETDATE(), {10}, {11}, 0, {12}, {13}, "
-        "{14}, {15}, {16}, {17}, {18}, {19}, {20}, NULL, NULL, NULL, {21}, \'Kml\', \'uGRIDD\', {22}, "
-        "\'Geography\', 30000 , geography::STGeomFromText({23}, 4326));\n".format(
+        "{14}, {15}, {16}, {17}, {18}, {19}, {20}, NULL, NULL, NULL, {21}, {22}, \'uGRIDD\', {23}, "
+        "\'Geography\', 30000 , geography::STGeomFromText({24}, 4326));\n".format(
             fid, name, full_name, bubble_title, category, table_name, table_type, data_source, coverage, always_show,
             update_frequency, records, linked_data1, linked_data2, url, server_handler, client_handler,
-            client_parameter, is_regional, parent_layer, style, data_type, vertex, geography))
+            client_parameter, is_regional, parent_layer, style, data_type, layer_type, vertex, geography))
     sql_file.write('\nSelect * from Layer order by Sequence;')
 
     if table_name != 'NULL':
@@ -115,7 +117,7 @@ e4 = Entry(master)  # Bubble Title
 e4.insert(END, '**Texas Milepost**')
 
 e5 = Entry(master)  # Catgegory
-e5.insert(END, '**Public Data**')
+e5.insert(END, 'Public Data')
 
 e6 = Entry(master)  # Table Name
 e6.insert(END, '**Milepost_TX**')
@@ -167,22 +169,26 @@ e21.insert(END, '**Milepost.png**')
 e22 = Entry(master)  # DataType
 e22.insert(END, '**Point**')
 
-e23 = Entry(master)  # Vertex
-e23.insert(END, '0')
+e23 = Entry(master) # LayerType
+e23.insert(END, 'LayerType (Kml, Tile, Vector)')
 
-e24 = Entry(master)  # Geography
+e24 = Entry(master)  # Vertex
+e24.insert(END, '0')
 
-e25 = IntVar()
-Checkbutton(master, text="Create CSV Report", variable=e25).grid(row=24, sticky=W + E)
+e25 = Entry(master)  # Geography
+
+e26 = IntVar()
+Checkbutton(master, text="Create CSV Report", variable=e26).grid(row=26, sticky=W + E)
 
 # Create tkinter rows
-e_list = [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20, e21, e22, e23, e24]
+e_list = [e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12, e13, e14, e15, e16, e17, e18, e19, e20, e21, e22, e23, e24,
+          e25]
 
 for i in e_list:
     i.grid(row=e_list.index(i), column=1, sticky=W + E)
 
 # Create Save button
-Button(master, text='Save', command=make_sql_report).grid(row=25, column=1, sticky=W+E, pady=4, padx=10)
+Button(master, text='Save', command=make_sql_report).grid(row=26, column=1, sticky=W+E, pady=4, padx=10)
 # Button(master, text='Save', command=make_sql_report).grid(row=25, column=0, sticky=W+E, pady=4, padx=10)
 
 # Ensure text boxes expand with window
