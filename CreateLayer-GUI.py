@@ -2,7 +2,8 @@ from tkinter import filedialog
 from tkinter import *
 
 master = Tk()
-
+master.title("Create Layer Statement")
+master.geometry("500x558")
 # List to store field names
 field_names = ['Id', 'Name', 'FullName', 'Bubble Title', 'Category', 'Table Name', 'Table Type',
                'Data Source', 'Coverage', 'Always Show', 'Update Frequency', 'Records', 'LinkedData1', 'LinkedData2',
