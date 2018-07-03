@@ -117,7 +117,7 @@ e3.insert(END, '**Milepost (TX)**')
 e4 = Entry(master)  # Bubble Title
 e4.insert(END, '**Texas Milepost**')
 
-e5 = Entry(master)  # Catgegory
+e5 = Entry(master)  # Category
 e5.insert(END, 'Public Data')
 
 e6 = Entry(master)  # Table Name
@@ -170,7 +170,7 @@ e21.insert(END, '**Milepost.png**')
 e22 = Entry(master)  # DataType
 e22.insert(END, '**Point**')
 
-e23 = Entry(master) # LayerType
+e23 = Entry(master)  # LayerType
 e23.insert(END, 'LayerType (Kml, Tile, Vector)')
 
 e24 = Entry(master)  # Vertex
@@ -190,7 +190,6 @@ for i in e_list:
 
 # Create Save button
 Button(master, text='Save', command=make_sql_report).grid(row=26, column=1, sticky=W+E, pady=4, padx=10)
-# Button(master, text='Save', command=make_sql_report).grid(row=25, column=0, sticky=W+E, pady=4, padx=10)
 
 # Ensure text boxes expand with window
 master.columnconfigure(1, weight=1)
