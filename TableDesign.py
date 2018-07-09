@@ -1,5 +1,4 @@
 # To Do
-# Export sample values into a file
 # Make sure table name is in database
 
 import pyodbc
@@ -9,15 +8,16 @@ from tkinter import filedialog
 root = tk.Tk()
 root.withdraw()
 
+# Prompt user for output file
 file_path = filedialog.asksaveasfilename(defaultextension=".txt",
                                          filetypes=(("txt", "*.txt"), ("all files", "*.*")))
 
-txt_export = open(file_path, 'w')
+txt_export = open(file_path, 'w')  #
 
 server = 'planet15.database.windows.net'
 database = 'ugridd'
 username = 'test'
-password = 'Sql.123456'
+password = input("Enter server password: ")
 driver = '{ODBC Driver 13 for SQL Server}'
 cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD=' +
                       password)
