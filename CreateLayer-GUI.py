@@ -4,6 +4,7 @@ from tkinter import *
 master = Tk()
 master.title("Create Layer Statement")
 master.geometry("500x558")
+
 # List to store field names
 field_names = ['Id', 'Name', 'FullName', 'Bubble Title', 'Category', 'Table Name', 'Table Type',
                'Data Source', 'Coverage', 'Always Show', 'Update Frequency', 'Records', 'LinkedData1', 'LinkedData2',
@@ -102,7 +103,7 @@ CREATE SPATIAL INDEX [Idx_''' + e6.get() + '''_Geo]
 
 # Create labels
 for i in field_names:
-    Label(master, text=i).grid(row=field_names.index(i))
+    Label(master, text=i).grid(row=field_names.index(i), padx=5)
 
 # Define values from entries
 e1 = Entry(master)  # Id
