@@ -1,5 +1,5 @@
 # To Do
-# Make sure table name is in database
+# Handle error if password is incorrect
 
 import pyodbc
 import tkinter as tk
@@ -12,8 +12,9 @@ root.withdraw()
 file_path = filedialog.asksaveasfilename(defaultextension=".txt",
                                          filetypes=(("txt", "*.txt"), ("all files", "*.*")))
 
-txt_export = open(file_path, 'w')  #
+txt_export = open(file_path, 'w')  # Prompt user for path of file export
 
+# Define server information
 server = 'planet15.database.windows.net'
 database = 'ugridd'
 username = 'test'
@@ -34,7 +35,7 @@ for table in tables:
     table_list.append((table[0]).lower())
 
 
-while True:
+while True:  # While loop to prompt for table name and check if in database
     table_name = input('Type table name: ').lower()  # Ask user for table name
     if table_name in table_list:
         break
@@ -46,7 +47,7 @@ print('')  # Print blank line
 cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='{0}'".format(table_name))
 columns = cursor.fetchall()
 
-# Create List of columns not including Id and Geography
+# Create list of columns in table not including first and last (Id and Geography)
 for column in columns[1:-1]:
     col_list.append(column[0])
 
