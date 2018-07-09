@@ -19,7 +19,7 @@ GUI package: Tkinter
 
 ## table_design.py
 
-Table design seeks to speed up the table design process of creating a new uFIND layer table. 
+table_design.py seeks to speed up the SQL table design process when creating a new uFIND layer table. 
 
 ### Flow:
 * Prompt user for output file location
