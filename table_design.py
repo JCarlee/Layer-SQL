@@ -1,6 +1,3 @@
-# To Do
-# Handle error if password is incorrect
-
 import pyodbc
 import tkinter as tk
 from tkinter import filedialog
@@ -18,10 +15,19 @@ txt_export = open(file_path, 'w')  # Prompt user for path of file export
 server = 'planet15.database.windows.net'
 database = 'ugridd'
 username = 'test'
-password = input("Enter server password: ")
 driver = '{ODBC Driver 13 for SQL Server}'
-cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username+';PWD=' +
-                      password)
+
+while True:
+    try:
+        password = input("Enter server password: ")
+        cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1443;DATABASE='+database+';UID='+username
+                              + ';PWD='+password)
+        break
+    except pyodbc.Error as ex:
+        sqlstate = ex.args[0]
+        if sqlstate == '28000':
+            print("Connection failed: check password")
+
 cursor = cnxn.cursor()
 table_name = ''  # Define variable for table name to be used
 table_list = []  # Empty list for tables in uGRIDD DB
