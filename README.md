@@ -1,16 +1,25 @@
 # Layer-SQL
 
+## Dependencies
+* Python 3.6
+* Tkinter
+* pyodbc
+
 This project provides multiple database management tools for the uGRIDD GIS team. These tools aid in the creation of new uFIND layer tables within the uGRIDD Azure Database.
 
 ## layer_statement.py
 
 The layer statement utility provides a graphical user interface for providing values to be used in the layer.sql statment. Default values are provided, but should be replaced.
 
+Pressing save creates a .sql file as chosen by the user. If "Create CSV Report" is selected, an accompanying csv will 
+
 GUI package: Tkinter
+
+![Layer GUI](layer_gui.png)
 
 ## table_design.py
 
-Table design seeks to speed up the table design process of creating a new uFIND layer table. 
+table_design.py seeks to speed up the SQL table design process when creating a new uFIND layer table. 
 
 ### Flow:
 * Prompt user for output file location
