@@ -59,3 +59,7 @@ The client parameter tool is an aid to the layer statement utility. ClientParame
 * Based on # of uGRIDD Bubble fields, prompt user for both source field names and field definition (atr, link)
 * Prompt user for style based on geometry type
 * Ouput generated
+
+## Author
+
+* **John Carlee** - JCarlee@gmail.com
