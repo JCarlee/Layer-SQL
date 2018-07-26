@@ -11,11 +11,13 @@ This project provides multiple database management tools for the uGRIDD GIS team
 
 The layer statement utility provides a graphical user interface for providing values to be used in the layer.sql statment. Default values are provided, but should be replaced.
 
-Pressing save creates a .sql file as chosen by the user. If "Create CSV Report" is selected, an accompanying csv will 
+Clicking save creates a .sql file as chosen by the user. If "Create CSV Report" is selected, an accompanying csv will 
 
 GUI package: Tkinter
 
 ![Layer GUI](layer_gui.png)
+
+Asterisks indicate placeholder values that must be replaced.
 
 ## table_design.py
 
