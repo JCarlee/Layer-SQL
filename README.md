@@ -1,7 +1,7 @@
 # Layer-SQL
 
 ## Dependencies
-* Python 3.6
+* Python 3
 * Tkinter
 * pyodbc
 
