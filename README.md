@@ -17,7 +17,7 @@ GUI package: Tkinter
 
 ![Layer GUI](layer_gui.png)
 
-Asterisks indicate placeholder values that must be replaced.
+Asterisks indicate placeholder values that must be replaced. Placeholders are intended to aid the user as a reference to common values in the Layer table.
 
 ## table_design.py
 
