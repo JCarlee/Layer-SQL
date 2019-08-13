@@ -68,7 +68,7 @@ def make_sql_report():
     sql_file.write(
         "Values({0}, EMPTY, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, 1, {9}, 7, GETDATE(), {10}, {11}, 0, {12}, {13}, "
         "{14}, {15}, {16}, {17}, {18}, {19}, {20}, NULL, NULL, NULL, {21}, {22}, \'uGRIDD\', {23}, "
-        "\'Geography\', 30000 , geography::STGeomFromText({24}, 4326));\n".format(
+        "\'Geography\', 30000, geography::STGeomFromText({24}, 4326));\n".format(
             fid, name, full_name, bubble_title, category, table_name, table_type, data_source, coverage, always_show,
             update_frequency, records, linked_data1, linked_data2, url, server_handler, client_handler,
             client_parameter, is_regional, parent_layer, style, data_type, layer_type, vertex, geography))

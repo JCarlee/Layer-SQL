@@ -17,7 +17,7 @@ def get_geom_type():
     while True:
         geom_type = input('Geometry type: ')
         geom_type = geom_type.capitalize()
-        if geom_type != 'Point' and geom_type != 'Polygon' and geom_type != 'Line':
+        if geom_type != 'Point' and geom_type != 'Polygon' and geom_type != 'Polyline':
             print('Geometry type is not valid, please enter again.')
             time.sleep(1)
         else:
@@ -34,10 +34,10 @@ def style_f(geom_style):
             style = input('Style ("#000000",0.8,2,"#005CE6",0.35): ')
             return style
         elif geom_type == 'Point':
-            style = input('Style (/Images/MapIcon/Bridge.png): ')
+            style = input('Style (/Images/MapIcon/Bridge.png | "#000000",0.8,2,"#005CE6",0.35): ')
             return style
-        elif geom_type == 'Line':
-            style = input('Style (Line): ')
+        elif geom_type == 'Polyline':
+            style = input('Style ("#000000",0.8,2): ')
             return style
         else:
             print('Geometry type is not valid')
@@ -60,8 +60,8 @@ def fields_f():
 
     # Ask for field name and type based on list length
     for x in range(0, len(ugridd_field)):
-        a = input('Enter Tile Field Name for ' + ugridd_field[x] + ': ')
-        b = input('Enter Tile Field definition (atr, link) for ' + ugridd_field[x] + ': ')
+        a = input('Enter Field Name for ' + ugridd_field[x] + ': ')
+        b = input('Enter Field definition (atr, link) for ' + ugridd_field[x] + ': ')
         rest_field.append(a)
         field_type.append(b)
 
