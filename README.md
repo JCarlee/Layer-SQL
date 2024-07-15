@@ -5,7 +5,7 @@
 * Tkinter
 * pyodbc
 
-This project provides multiple database management tools for the uGRIDD GIS team. These tools aid in the creation of new uFIND layer tables within the uGRIDD Azure Database.
+This project provides multiple database management tools for a GIS team. These tools aid in the creation of new uFIND layer tables within an Azure Database.
 
 ## layer_statement.py
 
@@ -44,8 +44,8 @@ The client parameter tool is an aid to the layer statement utility. ClientParame
 * Prompt user for /query URL
 * Prompt user for geometry type (point, polygon, line) and verify input
 * Prompt user for Title field
-* Prompt user for uGRIDD Bubble field names
-* Based on # of uGRIDD Bubble fields, prompt user for both source field names and field definition (atr, link)
+* Prompt user for Bubble field names
+* Based on # of Bubble fields, prompt user for both source field names and field definition (atr, link)
 * Prompt user for style based on geometry type
 * Ouput generated
 
@@ -57,11 +57,11 @@ The client parameter tool is an aid to the layer statement utility. ClientParame
 * Prompt user for bounding coordinates in WGS84 (West, South, East, North)
 * Prompt user for /export URL
 * Prompt user for /query URL
-* Prompt user for uGRIDD Bubble field names
-* Based on # of uGRIDD Bubble fields, prompt user for both source field names and field definition (atr, link)
+* Prompt user for Bubble field names
+* Based on # of Bubble fields, prompt user for both source field names and field definition (atr, link)
 * Prompt user for style based on geometry type
 * Ouput generated
 
 ## Author
 
-* **John Carlee** - JCarlee@gmail.com
+* **John Carlee**
